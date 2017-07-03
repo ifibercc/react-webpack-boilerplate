@@ -40,8 +40,10 @@ module.exports = {
     ],
   },
   devServer: {
+    contentBase: path.join(__dirname, 'build'),
+    watchContentBase: true,
     historyApiFallback: true,
-    noInfo: true,
+    hot: true,
     port: 8888,
     proxy: {
       '/api': 'http://122.114.38.213',
@@ -49,5 +51,8 @@ module.exports = {
     },
   },
   devtool: '#eval-source-map',
-  plugins: [new webpack.optimize.UglifyJsPlugin()],
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+    ],
 };
